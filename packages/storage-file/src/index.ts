@@ -22,6 +22,7 @@ import {
   writeFile,
 } from "./helpers";
 
+const fileSuffix = "_";
 const metaSuffix = ".meta.json";
 
 export type FileStorageErrorCode =
@@ -53,7 +54,7 @@ export class FileStorage extends LocalStorage {
     const sanitisedKey = this.sanitise ? sanitisePath(key) : key;
     const filePath = path.join(this.root, sanitisedKey);
     return [
-      filePath.startsWith(this.root) ? filePath : undefined,
+      filePath.startsWith(this.root) ? (filePath + fileSuffix) : undefined,
       sanitisedKey !== key,
     ];
   }
